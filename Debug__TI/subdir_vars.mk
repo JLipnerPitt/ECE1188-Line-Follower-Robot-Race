@@ -8,6 +8,7 @@ SHELL = cmd.exe
 C_SRCS += \
 ../Clock.c \
 ../CortexM.c \
+../Reflectance.c \
 ../SysTickInts.c \
 ../main.c \
 ../startup_msp432p401r_ccs.c \
@@ -16,6 +17,7 @@ C_SRCS += \
 C_DEPS += \
 ./Clock.d \
 ./CortexM.d \
+./Reflectance.d \
 ./SysTickInts.d \
 ./main.d \
 ./startup_msp432p401r_ccs.d \
@@ -24,6 +26,7 @@ C_DEPS += \
 OBJS += \
 ./Clock.obj \
 ./CortexM.obj \
+./Reflectance.obj \
 ./SysTickInts.obj \
 ./main.obj \
 ./startup_msp432p401r_ccs.obj \
@@ -32,6 +35,7 @@ OBJS += \
 OBJS__QUOTED += \
 "Clock.obj" \
 "CortexM.obj" \
+"Reflectance.obj" \
 "SysTickInts.obj" \
 "main.obj" \
 "startup_msp432p401r_ccs.obj" \
@@ -40,6 +44,7 @@ OBJS__QUOTED += \
 C_DEPS__QUOTED += \
 "Clock.d" \
 "CortexM.d" \
+"Reflectance.d" \
 "SysTickInts.d" \
 "main.d" \
 "startup_msp432p401r_ccs.d" \
@@ -48,6 +53,7 @@ C_DEPS__QUOTED += \
 C_SRCS__QUOTED += \
 "../Clock.c" \
 "../CortexM.c" \
+"../Reflectance.c" \
 "../SysTickInts.c" \
 "../main.c" \
 "../startup_msp432p401r_ccs.c" \
