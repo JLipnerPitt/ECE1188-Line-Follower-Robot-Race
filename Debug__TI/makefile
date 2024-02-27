@@ -17,6 +17,7 @@ ORDERED_OBJS += \
 "./main.obj" \
 "./startup_msp432p401r_ccs.obj" \
 "./system_msp432p401r.obj" \
+"../msp432p401r.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
 
@@ -132,11 +133,11 @@ EXE_OUTPUTS__QUOTED += \
 
 
 # All Target
-all: $(OBJS) $(GEN_CMDS)
+all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@$(MAKE) --no-print-directory -Onone "ECE1188 LFR.out"
 
 # Tool invocations
-ECE1188\ LFR.out: $(OBJS) $(GEN_CMDS)
+ECE1188\ LFR.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: Arm Linker'
 	"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --advice:power=all --define=__MSP432P401R__ --define=ccs -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"ECE1188 LFR.map" --heap_size=1024 --stack_size=512 -i"C:/ti/ccs1260/ccs/ccs_base/arm/include" -i"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/lib" -i"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="ECE1188 LFR_linkInfo.xml" --rom_model -o "ECE1188 LFR.out" $(ORDERED_OBJS)

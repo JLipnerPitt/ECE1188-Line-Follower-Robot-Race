@@ -73,7 +73,10 @@ uint8_t decision(uint8_t input) {
       case 0xE3:
       case 0xC7: return 2;
 
-      case 0xE7: return 3;
+      case 0xE7:
+      case 0xCF:
+      case 0xF3: return 3;
+      //case 0x81:return 3;
 
       case 0x9F:
       case 0x8F:
