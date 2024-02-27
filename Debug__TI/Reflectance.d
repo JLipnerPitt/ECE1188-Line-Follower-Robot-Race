@@ -21,6 +21,7 @@ Reflectance.obj: C:/ti/ccs1260/ccs/ccs_base/arm/include/CMSIS/cmsis_compiler.h
 Reflectance.obj: C:/ti/ccs1260/ccs/ccs_base/arm/include/CMSIS/cmsis_ccs.h
 Reflectance.obj: C:/ti/ccs1260/ccs/ccs_base/arm/include/system_msp432p401r.h
 Reflectance.obj: ../Clock.h
+Reflectance.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include/stdbool.h
 
 ../Reflectance.c:
 
@@ -63,4 +64,6 @@ C:/ti/ccs1260/ccs/ccs_base/arm/include/CMSIS/cmsis_ccs.h:
 C:/ti/ccs1260/ccs/ccs_base/arm/include/system_msp432p401r.h:
 
 ../Clock.h:
+
+C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include/stdbool.h:
 
