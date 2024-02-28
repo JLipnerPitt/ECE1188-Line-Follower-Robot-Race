@@ -65,17 +65,20 @@ uint8_t Reflectance_End(void) {
 }*/
 
 uint8_t decision(uint8_t input) {
+    // 0x11001111 and 0x11110011 might work better in slight_left and slight_right respectively
     switch (input) {
       case 0xFF: return 0; // stop
 
-      case 0xC3: return 1; // fast forward
+      case 0xC3:
+      case 0xE7: return 1; // fast forward
 
       case 0xE3:
       case 0xC7: return 2; // forward
 
-      case 0xE7:
       case 0xCF:
-      case 0xF3: return 3; // slow forward
+      case 0xF3:
+      case 0xEF:
+      case 0xF7: return 3; // slow forward
       //case 0x81:return 3;
 
       case 0x9F:
@@ -90,8 +93,7 @@ uint8_t decision(uint8_t input) {
       case 0x07:
       case 0x7F: return 7; // 22 degree left
 
-      case 0xDF:
-      case 0xEF: return 8; // slight left
+      case 0xDF: return 8; // slight left
 
       case 0xF9:
       case 0xF1:
@@ -105,8 +107,7 @@ uint8_t decision(uint8_t input) {
       case 0xE0:
       case 0xFE: return 12; // 22 degree right
 
-      case 0xFB:
-      case 0xF7: return 13; // slight right
+      case 0xFB: return 13; // slight right
 
       default: return 0;
     }
