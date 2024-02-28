@@ -38,7 +38,7 @@ void Reflectance_Start(void) {
 }
 
 uint8_t Reflectance_End(void) {
-    uint8_t input = P7->IN;
+    uint8_t input = ~(P7->IN);
     P5->OUT &= ~0x08; // turns off even IR sensors
     P9->OUT &= ~0x04; // turns on even IR sensors
     return input;
@@ -66,39 +66,47 @@ uint8_t Reflectance_End(void) {
 
 uint8_t decision(uint8_t input) {
     switch (input) {
-      case 0xFF: return 0;
+      case 0xFF: return 0; // stop
 
-      case 0xC3: return 1;
+      case 0xC3: return 1; // fast forward
 
       case 0xE3:
-      case 0xC7: return 2;
+      case 0xC7: return 2; // forward
 
       case 0xE7:
       case 0xCF:
-      case 0xF3: return 3;
+      case 0xF3: return 3; // slow forward
       //case 0x81:return 3;
 
       case 0x9F:
       case 0x8F:
-      case 0x87: return 4;
+      case 0x87: return 4; // slow left
 
       case 0x3F:
-      case 0x1F: return 5;
+      case 0x1F: return 5; // left
 
-      case 0x0F: return 6;
+      case 0x0F: return 6; // 45 degree left
 
-      case 0x07: return 7;
+      case 0x07:
+      case 0x7F: return 7; // 22 degree left
+
+      case 0xDF:
+      case 0xEF: return 8; // slight left
 
       case 0xF9:
       case 0xF1:
-      case 0xE1: return 8;
+      case 0xE1: return 9; // slow right
 
       case 0xFC:
-      case 0xF8: return 9;
+      case 0xF8: return 10; // right
 
-      case 0xF0: return 10;
+      case 0xF0: return 11; // 45 degree right
 
-      case 0xE0: return 11;
+      case 0xE0:
+      case 0xFE: return 12; // 22 degree right
+
+      case 0xFB:
+      case 0xF7: return 13; // slight right
 
       default: return 0;
     }

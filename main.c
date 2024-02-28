@@ -14,7 +14,7 @@ struct State {
     //uint32_t leftwheel;
     //uint32_t rightwheel;
     uint32_t delay;
-    const struct State *next_state[12];
+    const struct State *next_state[14];
 };
 typedef const struct State State_t; // lets us create state structures with the State_t initializer
 
@@ -27,29 +27,33 @@ typedef const struct State State_t; // lets us create state structures with the 
 #define left &FSM[5]
 #define left_45degrees &FSM[6]
 #define left_22degrees &FSM[7]
-#define slow_right &FSM[8]
-#define right &FSM[9]
-#define right_45degrees &FSM[10]
-#define right_22degrees &FSM[11]
+#define slight_left &FSM[8]
+#define slow_right &FSM[9]
+#define right &FSM[10]
+#define right_45degrees &FSM[11]
+#define right_22degrees &FSM[12]
+#define slight_right &FSM[13]
 
 #define RED 0x01 // stop
 #define GREEN 0x02 // forward
-#define BLUE 0x04 // left
-#define PINK 0x05 // right
+#define BLUE 0x04 // right
+#define PINK 0x05 // left
 
-State_t FSM[12] ={
-  {0x01,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slow_right,right,right_45degrees,right_22degrees}},
-  {0x02,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slow_right,right,right_45degrees,right_22degrees}},
-  {0x02,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slow_right,right,right_45degrees,right_22degrees}},
-  {0x02,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slow_right,right,right_45degrees,right_22degrees}},
-  {0x05,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slow_right,right,right_45degrees,right_22degrees}},
-  {0x05,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slow_right,right,right_45degrees,right_22degrees}},
-  {0x05,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slow_right,right,right_45degrees,right_22degrees}},
-  {0x05,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slow_right,right,right_45degrees,right_22degrees}},
-  {0x04,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slow_right,right,right_45degrees,right_22degrees}},
-  {0x04,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slow_right,right,right_45degrees,right_22degrees}},
-  {0x04,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slow_right,right,right_45degrees,right_22degrees}},
-  {0x04,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slow_right,right,right_45degrees,right_22degrees}}
+State_t FSM[14] ={
+  {0x01,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {0x02,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {0x02,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {0x02,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {0x05,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {0x05,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {0x05,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {0x05,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {0x05,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {0x04,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {0x04,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {0x04,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {0x04,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {0x04,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}}
 };
 
 // global variables
