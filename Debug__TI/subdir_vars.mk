@@ -11,6 +11,7 @@ CMD_SRCS += \
 C_SRCS += \
 ../Clock.c \
 ../CortexM.c \
+../Inits.c \
 ../Reflectance.c \
 ../SysTickInts.c \
 ../main.c \
@@ -20,6 +21,7 @@ C_SRCS += \
 C_DEPS += \
 ./Clock.d \
 ./CortexM.d \
+./Inits.d \
 ./Reflectance.d \
 ./SysTickInts.d \
 ./main.d \
@@ -29,6 +31,7 @@ C_DEPS += \
 OBJS += \
 ./Clock.obj \
 ./CortexM.obj \
+./Inits.obj \
 ./Reflectance.obj \
 ./SysTickInts.obj \
 ./main.obj \
@@ -38,6 +41,7 @@ OBJS += \
 OBJS__QUOTED += \
 "Clock.obj" \
 "CortexM.obj" \
+"Inits.obj" \
 "Reflectance.obj" \
 "SysTickInts.obj" \
 "main.obj" \
@@ -47,6 +51,7 @@ OBJS__QUOTED += \
 C_DEPS__QUOTED += \
 "Clock.d" \
 "CortexM.d" \
+"Inits.d" \
 "Reflectance.d" \
 "SysTickInts.d" \
 "main.d" \
@@ -56,6 +61,7 @@ C_DEPS__QUOTED += \
 C_SRCS__QUOTED += \
 "../Clock.c" \
 "../CortexM.c" \
+"../Inits.c" \
 "../Reflectance.c" \
 "../SysTickInts.c" \
 "../main.c" \

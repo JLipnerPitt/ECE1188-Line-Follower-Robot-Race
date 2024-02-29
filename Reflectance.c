@@ -1,7 +1,6 @@
 #include "Reflectance.h"
 #include <msp.h>
 #include "Clock.h"
-#include <stdbool.h>
 
 void Reflectance_Init(void){
 

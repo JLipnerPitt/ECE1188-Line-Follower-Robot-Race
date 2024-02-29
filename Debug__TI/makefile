@@ -12,6 +12,7 @@ GEN_CMDS__FLAG :=
 ORDERED_OBJS += \
 "./Clock.obj" \
 "./CortexM.obj" \
+"./Inits.obj" \
 "./Reflectance.obj" \
 "./SysTickInts.obj" \
 "./main.obj" \
@@ -147,8 +148,8 @@ ECE1188\ LFR.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)
-	-$(RM) "Clock.obj" "CortexM.obj" "Reflectance.obj" "SysTickInts.obj" "main.obj" "startup_msp432p401r_ccs.obj" "system_msp432p401r.obj" 
-	-$(RM) "Clock.d" "CortexM.d" "Reflectance.d" "SysTickInts.d" "main.d" "startup_msp432p401r_ccs.d" "system_msp432p401r.d" 
+	-$(RM) "Clock.obj" "CortexM.obj" "Inits.obj" "Reflectance.obj" "SysTickInts.obj" "main.obj" "startup_msp432p401r_ccs.obj" "system_msp432p401r.obj" 
+	-$(RM) "Clock.d" "CortexM.d" "Inits.d" "Reflectance.d" "SysTickInts.d" "main.d" "startup_msp432p401r_ccs.d" "system_msp432p401r.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

@@ -1,5 +1,6 @@
 "./Clock.obj"
 "./CortexM.obj"
+"./Inits.obj"
 "./Reflectance.obj"
 "./SysTickInts.obj"
 "./main.obj"
