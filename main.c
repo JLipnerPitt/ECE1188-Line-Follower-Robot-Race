@@ -80,6 +80,7 @@ void SysTick_Handler(void) {
         index = decision(IRSensorInput);
         sensor_state = sensor_state->next_state[index];
         P2->OUT = sensor_state->output;
+        //Do same thing but with motor state
         Clock_Delay1us(sensor_state->delay);
         MainCount = 0;
         return;
