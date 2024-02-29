@@ -27,8 +27,6 @@
 // Period of P2.7 is period*1.333us, duty cycle is duty4/period
 void PWM_Init34(uint16_t period, uint16_t duty3, uint16_t duty4){
 
-  if(duty3 >= period) return; // bad input
-  if(duty4 >= period) return; // bad input
   P2->DIR |= 0xC0;          // P2.6, P2.7 output
   P2->SEL0 |= 0xC0;         // P2.6, P2.7 Timer0A functions
   P2->SEL1 &= ~0xC0;        // P2.6, P2.7 Timer0A functions
@@ -51,8 +49,8 @@ void PWM_Init34(uint16_t period, uint16_t duty3, uint16_t duty4){
 // change duty cycle of PWM output on P2.7
 // Inputs:  duty4
 // Outputs: none// period of P2.7 is 2*period*666.7ns, duty cycle is duty2/period
-void PWM_Duty34(uint16_t duty3, uint16_t duty4){
+void PWM_Duty34(uint16_t Duty3, uint16_t Duty4){
 
-  TIMER_A0->CCR[4] = duty4;        // CCR4 duty cycle is duty4/period
-  TIMER_A0->CCR[3] = duty3;        // CCR3 duty cycle is duty3/period
+  TIMER_A0->CCR[4] = Duty4;        // CCR4 duty cycle is duty4/period
+  TIMER_A0->CCR[3] = Duty3;       // CCR3 duty cycle is duty3/period
 }
