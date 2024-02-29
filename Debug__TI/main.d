@@ -22,6 +22,7 @@ main.obj: C:/ti/ccs1260/ccs/ccs_base/arm/include/system_msp432p401r.h
 main.obj: ../CortexM.h
 main.obj: ../SysTickInts.h
 main.obj: ../Clock.h
+main.obj: ../Reflectance.h
 
 ../main.c:
 
@@ -66,4 +67,6 @@ C:/ti/ccs1260/ccs/ccs_base/arm/include/system_msp432p401r.h:
 ../SysTickInts.h:
 
 ../Clock.h:
+
+../Reflectance.h:
 
