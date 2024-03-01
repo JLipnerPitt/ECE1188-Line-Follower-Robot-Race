@@ -65,12 +65,12 @@ void Motor_Stop(void){
 //        rightDuty duty cycle of right wheel (0 to 14,998)
 // Output: none
 // Assumes: Motor_Init() has been called
-void Motor_Forward(uint16_t leftDuty, uint16_t rightDuty){ 
+void Motor_Forward(uint16_t leftDuty, uint16_t rightDuty){
 
     P5->OUT &= ~0x30;   // Clear direction bits for forward motion
     P3->OUT |= 0xC0;    // Enable both drivers
 
-    PWM_Duty34(rightDuty,leftDuty); // Set PWM duty cycles
+    PWM_Duty34(leftDuty,rightDuty); // Set PWM duty cycles
 }
 
 // ------------Motor_Right------------
@@ -122,7 +122,7 @@ void Motor_Left(uint16_t leftDuty, uint16_t rightDuty){
 //        rightDuty duty cycle of right wheel (0 to 14,998)
 // Output: none
 // Assumes: Motor_Init() has been called
-void Motor_Backward(uint16_t leftDuty, uint16_t rightDuty){ 
+void Motor_Backward(uint16_t leftDuty, uint16_t rightDuty){
 
     // Left motor backward
     P5->OUT |= 0x10;    // set P5.4 high (direction backward)
@@ -132,5 +132,5 @@ void Motor_Backward(uint16_t leftDuty, uint16_t rightDuty){
     P5->OUT |= 0x20;    // set P5.5 high (direction backward)
     P3->OUT |= 0x40;    // set P3.6 high (enable motor)
 
-    PWM_Duty34(rightDuty,leftDuty); // Set PWM duty cycles
+    PWM_Duty34(leftDuty,rightDuty); // Set PWM duty cycles
 }

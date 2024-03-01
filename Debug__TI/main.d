@@ -23,6 +23,8 @@ main.obj: ../CortexM.h
 main.obj: ../SysTickInts.h
 main.obj: ../Clock.h
 main.obj: ../Reflectance.h
+main.obj: ../Motor.h
+main.obj: ../PWM.h
 
 ../main.c:
 
@@ -69,4 +71,8 @@ C:/ti/ccs1260/ccs/ccs_base/arm/include/system_msp432p401r.h:
 ../Clock.h:
 
 ../Reflectance.h:
+
+../Motor.h:
+
+../PWM.h:
 
