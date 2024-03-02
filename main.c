@@ -16,28 +16,23 @@ struct State {
     uint16_t leftwheel;
     uint16_t rightwheel;
     uint8_t delay;
-    const struct State *next_state[14];
+    const struct State *next_state[4];
 };
-typedef const struct State State_t; // lets us create state structures with the State_t initializer
+typedef const struct State State_t; // allows us to create state structures with the State_t initializer
 
 // all possible next states
-#define stop &FSM[0]
-#define fast_forward &FSM[1]
-#define forward &FSM[2]
-#define slow_forward &FSM[3]
-#define slow_left &FSM[4]
-#define left &FSM[5]
-#define left_45degrees &FSM[6]
-#define left_22degrees &FSM[7]
-#define slight_left &FSM[8]
-#define slow_right &FSM[9]
-#define right &FSM[10]
-#define right_45degrees &FSM[11]
-#define right_22degrees &FSM[12]
-#define slight_right &FSM[13]
-//#define backwards &FSM[14]
-//#define back_left &FSM[15]
-//#define back_right &FSM[16]
+#define Stop &FSM[0]
+#define Forward &FSM[1]
+#define Slow_Forward &FSM[2]
+#define Left_Turn &FSM[3]
+#define Right_Turn &FSM[4]
+#define Hard_Left &FSM[5]
+#define Hard_Right &FSM[6]
+#define Small_Left &FSM[7]
+#define Small_Right &FSM[8]
+/*#define Backward &FSM[9]
+#define Back_Left &FSM[10]
+#define Back_Right_45degrees &FSM[11]*/
 
 #define RED 0x01 // stop
 #define GREEN 0x02 // forward
@@ -54,47 +49,33 @@ void (*motor_right)(uint16_t, uint16_t) = &Motor_Right;
 void (*motor_backward)(uint16_t, uint16_t) = &Motor_Backward;
 
 //50% duty cycle is 7500
-State_t FSM[14] ={
-  {RED,0,0,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
-
-  // fast forward
-  {GREEN,4250,4500,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+State_t FSM[9] ={
+  // lost
+  {RED,0,0,10,{Slow_Forward,Left_Turn,Right_Turn,Stop}},
 
   // forward
-  {GREEN,4250,4500,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {GREEN,4250,4500,15,{Forward,Left_Turn,Right_Turn,Stop}},
 
   // slow forward
-  {GREEN,4250,4500,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {GREEN,2750,3000,10,{Forward,Left_Turn,Right_Turn,Stop}},
 
-  // slow left
-  {BLUE,4000,4500,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  // left turn
+  {YELLOW,5750,7000,15,{Forward,Small_Right,Small_Left,Small_Right}},
 
-  // left
-  {YELLOW,5500,7000,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  // right turn
+  {PURPLE,7000,5250,15,{Forward,Small_Right,Small_Left,Small_Left}},
 
-  // 45degree left
-  {BLUE,2500,7500,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  // hard left
+  {YELLOW,2500,7250,20,{Slow_Forward,Right_Turn,Left_Turn,Stop}},
 
-  // 22.5degree left
-  {YELLOW,1750,3250,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  // hard right
+  {PURPLE,2250,7500,20,{Slow_Forward,Right_Turn,Left_Turn,Stop}},
 
-  // slight left
-  {YELLOW,2000,2500,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  // small left
+  {YELLOW,2250,2500,10,{Slow_Forward,Small_Right,Small_Left,Right_Turn}},
 
-  // slow right
-  {SKYBLUE,4500,4000,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
-
-  // right
-  {PURPLE,7000,5500,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
-
-  // 45degree right
-  {SKYBLUE,7500,2500,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
-
-  // 22.5degree right
-  {PURPLE,3250,1750,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
-
-  // slight right
-  {PURPLE,2500,2000,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}}
+  // small right
+  {PURPLE,2750,2000,10,{Slow_Forward,Small_Right,Small_Left,Left_Turn}}
 };
 
 // global variables
@@ -120,18 +101,28 @@ void SysTick_Handler(void) {
         index = decision(IRSensorInput);
         sensor_state = sensor_state->next_state[index];
         P2->OUT = sensor_state->output;
-        if (index > 0 & index < 4) {
-            Motor_Forward(sensor_state->leftwheel,sensor_state->rightwheel);
+
+        switch(index) {
+          case 0: Motor_Stop();
+                  break;
+
+          case 1:
+          case 2: Motor_Forward(sensor_state->leftwheel,sensor_state->rightwheel);
+                  break;
+
+          case 3:
+          case 5:
+          case 7: Motor_Left(sensor_state->leftwheel,sensor_state->rightwheel);
+                  break;
+
+          case 4:
+          case 6:
+          case 8: Motor_Right(sensor_state->leftwheel,sensor_state->rightwheel);
+                  break;
+
+          default: Motor_Forward(2750,3000);
         }
-        else if (index > 3 && index < 9) {
-            Motor_Left(sensor_state->leftwheel,sensor_state->rightwheel);
-        }
-        else if (index > 9 && index < 14) {
-            Motor_Right(sensor_state->leftwheel,sensor_state->rightwheel);
-        }
-        else {
-            Motor_Stop();
-        }
+
         Clock_Delay1us(sensor_state->delay);
         MainCount = 0;
         return;
@@ -148,7 +139,7 @@ int main(void)
     Reflectance_Init();
     Motor_Init();
     PWM_Init34(14999);
-    sensor_state = stop;
+    sensor_state = Stop;
     EnableInterrupts();
 
     while(1) {

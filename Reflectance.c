@@ -69,43 +69,23 @@ uint8_t decision(uint8_t input) {
       case 0xFF: return 0; // stop
 
       case 0xC3:
-      case 0xE7: return 1; // fast forward
-
+      case 0xE7:
       case 0xE3:
-      case 0xC7: return 2; // forward
+      case 0xC7: return 1; // forward
 
       case 0xCF:
       case 0xF3:
       case 0xEF:
       case 0xF7:
-      case 0x81: return 3; // slow forward
+      case 0x81: return 2; // slow forward
       //case 0x81:return 3;
-
-      case 0x8F:
-      case 0x87:
-      case 0x9F: return 4; // slow left
 
       case 0x3F:
       case 0xDC:
       case 0xDE:
       case 0xCE:
       case 0x9C:
-      case 0x1F: return 5; // left
-
-      case 0x0F:
-      case 0x63:
-      case 0x1C:
-      case 0x03: return 6;
-      //case 0xF8: return 6; // 45 degree left
-
-      case 0x07:
-      case 0x7F: return 7; // 22 degree left
-
-      case 0xDF:
-      case 0xF6: return 8; // slight left
-
-      case 0xF1:
-      case 0xE1: return 9; // slow right
+      case 0x1F: return 3; // left
 
       case 0xFC:
       case 0xF9:
@@ -113,19 +93,35 @@ uint8_t decision(uint8_t input) {
       case 0x7B:
       case 0x73:
       case 0x39:
-      case 0xF8: return 10; // right
+      case 0xF8: return 4; // right
+
+      case 0x0F:
+      case 0x63:
+      case 0x1C:
+      case 0x03: return 5;
+      //case 0xF8: return 6; // hard left
 
       case 0xF0:
       case 0xC6:
       case 0x38:
-      case 0xC0: return 11;
-      //case 0x1F: return 11; // 45 degree right
+      case 0xC0: return 6;
+      //case 0x1F: return 11; // hard right
 
-      case 0xE0:
-      case 0xFE: return 12; // 22 degree right
+      case 0x8F:
+      case 0x87:
+      case 0x9F:
+      case 0xDF:
+      case 0xF6:
+      case 0x07:
+      case 0x7F: return 7; // small left
 
+
+      case 0xF1:
+      case 0xE1:
       case 0xFB:
-      case 0x6F: return 13; // slight right
+      case 0x6F:
+      case 0xE0:
+      case 0xFE: return 8; // slow right
 
       default: return 0;
     }
