@@ -11,6 +11,17 @@
  * main.c
  */
 
+/*void (*motor_stop)(uint16_t, uint16_t) = &Motor_Stop;
+void (*motor_forward)(uint16_t, uint16_t) = &Motor_Forward;
+void (*motor_left)(uint16_t, uint16_t) = &Motor_Left;
+void (*motor_right)(uint16_t, uint16_t) = &Motor_Right;
+void (*motor_backward)(uint16_t, uint16_t) = &Motor_Backward;*/
+
+// stores each motor action for a given state
+void (*lookup_table[9])(uint16_t, uint16_t) = {
+    Motor_Stop, Motor_Forward, Motor_Forward, Motor_Left, Motor_Right, Motor_Left, Motor_Right, Motor_Left, Motor_Right// ... more function pointers ...
+};
+
 struct State {
     uint8_t output;
     uint16_t leftwheel;
@@ -42,14 +53,9 @@ typedef const struct State State_t; // allows us to create state structures with
 #define WHITE 0x07
 #define SKYBLUE 0x06
 
-void (*motor_stop)(void) = &Motor_Stop;
-void (*motor_forward)(uint16_t, uint16_t) = &Motor_Forward;
-void (*motor_left)(uint16_t, uint16_t) = &Motor_Left;
-void (*motor_right)(uint16_t, uint16_t) = &Motor_Right;
-void (*motor_backward)(uint16_t, uint16_t) = &Motor_Backward;
-
 //50% duty cycle is 7500
 State_t FSM[9] ={
+
   // lost
   {RED,0,0,10,{Slow_Forward,Left_Turn,Right_Turn,Stop}},
 
@@ -101,28 +107,7 @@ void SysTick_Handler(void) {
         index = decision(IRSensorInput);
         sensor_state = sensor_state->next_state[index];
         P2->OUT = sensor_state->output;
-
-        switch(index) {
-          case 0: Motor_Stop();
-                  break;
-
-          case 1:
-          case 2: Motor_Forward(sensor_state->leftwheel,sensor_state->rightwheel);
-                  break;
-
-          case 3:
-          case 5:
-          case 7: Motor_Left(sensor_state->leftwheel,sensor_state->rightwheel);
-                  break;
-
-          case 4:
-          case 6:
-          case 8: Motor_Right(sensor_state->leftwheel,sensor_state->rightwheel);
-                  break;
-
-          default: Motor_Forward(2750,3000);
-        }
-
+        lookup_table[index](sensor_state->leftwheel, sensor_state->rightwheel);
         Clock_Delay1us(sensor_state->delay);
         MainCount = 0;
         return;

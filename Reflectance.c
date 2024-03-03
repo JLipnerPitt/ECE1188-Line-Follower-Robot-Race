@@ -123,6 +123,6 @@ uint8_t decision(uint8_t input) {
       case 0xE0:
       case 0xFE: return 8; // slow right
 
-      default: return 0;
+      default: return 2;
     }
 }

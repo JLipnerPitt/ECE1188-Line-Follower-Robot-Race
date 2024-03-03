@@ -49,12 +49,12 @@ void Motor_Init(void){
 // set the PWM speed control to 0% duty cycle.
 // Input: none
 // Output: none
-void Motor_Stop(void){
+void Motor_Stop(uint16_t leftDuty, uint16_t rightDuty){
 
     P5->OUT &= ~0x30; // Clear direction bits
     P3->OUT &= ~0xC0;  // Disable drivers by clearing enable bits
 
-    PWM_Init34(14999, 0, 0); // Set right motor and right motor PWM to 0%
+    PWM_Init34(14999, leftDuty, rightDuty); // Set right motor and right motor PWM to 0%
 }
 
 // ------------Motor_Forward------------
