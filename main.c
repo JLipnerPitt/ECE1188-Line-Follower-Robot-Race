@@ -64,7 +64,7 @@ State_t FSM[14] ={
   {GREEN,4500,4250,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
 
   // slow forward
-  {GREEN,4500,4250,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+  {GREEN,2250,2000,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
 
   // slow left
   {BLUE,4500,4000,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
@@ -136,8 +136,8 @@ void SysTick_Handler(void) {
         }
         else {
             //my edit
-            //Motor_Stop();
-            Motor_Forward(4250, 4500);
+            Motor_Stop();
+            //Motor_Forward(1750, 2000);
             //
         }
         Clock_Delay1us(sensor_state->delay);
