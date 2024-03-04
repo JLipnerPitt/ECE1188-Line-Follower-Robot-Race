@@ -22,18 +22,27 @@ struct State {
     uint16_t leftwheel;
     uint16_t rightwheel;
     uint8_t delay;
-    const struct State *next_state[4];
+    const struct State *next_state[14];
 };
 typedef const struct State State_t; // allows us to create state structures with the State_t initializer
 
-// all possible next states
-#define Stop &FSM[0]
-#define Forward &FSM[1]
-#define Left_Turn &FSM[3]
-#define Right_Turn &FSM[4]
-/*#define Backward &FSM[9]
-#define Back_Left &FSM[10]
-#define Back_Right_45degrees &FSM[11]*/
+#define stop &FSM[0]
+#define fast_forward &FSM[1]
+#define forward &FSM[2]
+#define slow_forward &FSM[3]
+#define slow_left &FSM[4]
+#define left &FSM[5]
+#define left_45degrees &FSM[6]
+#define left_22degrees &FSM[7]
+#define slight_left &FSM[8]
+#define slow_right &FSM[9]
+#define right &FSM[10]
+#define right_45degrees &FSM[11]
+#define right_22degrees &FSM[12]
+#define slight_right &FSM[13]
+//#define backwards &FSM[14]
+//#define back_left &FSM[15]
+//#define back_right &FSM[16]
 
 #define RED 0x01 // stop
 #define GREEN 0x02 // forward
@@ -44,43 +53,58 @@ typedef const struct State State_t; // allows us to create state structures with
 #define SKYBLUE 0x06
 
 //50% duty cycle is 7500
-State_t FSM[9] ={
+State_t FSM[14] ={
+  {RED,0,0,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
 
- // lost
-   {RED,0,0,10,{Stop,Left_Turn,Right_Turn,Forward}},
+  // fast forward
+  {GREEN,4500,4250,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
 
-   // forward
-   {GREEN,4250,4500,15,{Stop,Forward,Left_Turn,Right_Turn}},
+  // forward
+  {GREEN,4500,4250,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
 
-   // slow forward
-   {GREEN,2750,3000,10,{Stop,Forward,Left_Turn,Right_Turn}},
+  // slow forward
+  {GREEN,2250,2000,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
 
-   // left turn
-   {YELLOW,5750,7000,15,{Right_Turn,Forward,Right_Turn,Left_Turn}},
+  // slow left
+  {BLUE,4500,4000,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
 
-   // right turn
-   {PURPLE,7000,5250,15,{Left_Turn,Forward,Right_Turn,Left_Turn}},
+  // left
+  {YELLOW,5750,7000,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
 
-   // hard left
-   {YELLOW,2500,7250,20,{Stop,Forward,Right_Turn,Left_Turn}},
+  // 45degree left
+  {BLUE,2500,7250,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
 
-   // hard right
-   {PURPLE,2250,7500,20,{Stop,Forward,Right_Turn,Left_Turn}},
+  // 22.5degree left
+  {YELLOW,1750,3000,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
 
-   // small left
-   {YELLOW,2250,2500,10,{Right_Turn,Forward,Right_Turn,Left_Turn}},
+  // slight left
+  {YELLOW,2250,2500,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
 
-   // small right
-   {PURPLE,2750,2000,10,{Left_Turn,Forward,Right_Turn,Left_Turn}}
+  // slow right
+  {SKYBLUE,4750,4000,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+
+  // right
+  {PURPLE,7000,5250,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+
+  // 45degree right
+  {SKYBLUE,7500,2250,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+
+  // 22.5degree right
+  {PURPLE,3500,1750,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}},
+
+  // slight right
+  {PURPLE,2750,2000,10,{stop,fast_forward,forward,slow_forward,slow_left,left,left_45degrees,left_22degrees,slight_left,slow_right,right,right_45degrees,right_22degrees,slight_right}}
 };
+
 
 // global variables
 uint8_t IRSensorInput, MainCount, index;
 State_t *sensor_state;  // pointer to ir_sensor fsm
 
 // stores each motor action for a given state
-void (*lookup_table[4])(uint16_t, uint16_t) = {
-    Motor_Stop, Motor_Forward, Motor_Left, Motor_Right
+void (*lookup_table[14])(uint16_t, uint16_t) = {
+    Motor_Stop, Motor_Forward, Motor_Forward, Motor_Left, Motor_Left, Motor_Left, Motor_Left, Motor_Left,
+    Motor_Right, Motor_Right, Motor_Right, Motor_Right, Motor_Right, Motor_Right
 };
 
 void Port2_Init(void) {
@@ -117,9 +141,9 @@ int main(void)
     SysTick_Init(48000,2);  // set up SysTick for 1000 Hz interrupts
     Port2_Init();
     Reflectance_Init();
+    PWM_Init34(14999, 0, 0);
     Motor_Init();
-    PWM_Init34(14999);
-    sensor_state = Stop;
+    sensor_state = stop;
     EnableInterrupts();
 
     while(1) {

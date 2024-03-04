@@ -87,7 +87,7 @@ void Motor_Init(void);
  * @return none
  * @brief  Stop the robot
  */
-void Motor_Stop(uint16_t leftDuty, uint16_t rightDuty);
+void Motor_Stop(uint16_t, uint16_t);
 
 /**
  * Drive the robot forward by running left and

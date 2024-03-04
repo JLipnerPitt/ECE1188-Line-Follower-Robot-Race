@@ -19,8 +19,9 @@ Motor.obj: C:/ti/ccs1260/ccs/ccs_base/arm/include/CMSIS/core_cm4.h
 Motor.obj: C:/ti/ccs1260/ccs/ccs_base/arm/include/CMSIS/cmsis_compiler.h
 Motor.obj: C:/ti/ccs1260/ccs/ccs_base/arm/include/CMSIS/cmsis_ccs.h
 Motor.obj: C:/ti/ccs1260/ccs/ccs_base/arm/include/system_msp432p401r.h
-Motor.obj: ../../inc/CortexM.h
-Motor.obj: ../../inc/PWM.h
+Motor.obj: ../CortexM.h
+Motor.obj: ../PWM.h
+Motor.obj: ../Motor.h
 
 ../Motor.c:
 
@@ -60,7 +61,9 @@ C:/ti/ccs1260/ccs/ccs_base/arm/include/CMSIS/cmsis_ccs.h:
 
 C:/ti/ccs1260/ccs/ccs_base/arm/include/system_msp432p401r.h:
 
-../../inc/CortexM.h:
+../CortexM.h:
 
-../../inc/PWM.h:
+../PWM.h:
+
+../Motor.h:
 
