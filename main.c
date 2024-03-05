@@ -51,34 +51,34 @@ typedef const struct State State_t; // allows us to create state structures with
 State_t FSM[10] ={
 
     // stop
-   {RED,3250,3250,10,{Stop, Stop, Stop, Stop, Stop, Stop, Stop, Stop}},
+   {RED,3250,3250,5,{Stop, Stop, Stop, Stop, Stop, Stop, Stop, Stop}},
 
     // lost
-   {WHITE,2500,2250,10,{Stop, Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+   {WHITE,2500,2250,15,{Stop, Slow_Forward, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
    // forward
-   {GREEN,4500,4250,15,{Stop, Slow_Forward, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+   {GREEN,4500,4250,15,{Stop, Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
    // slow forward
    {GREEN,3250,3000,20,{Stop, Lost, Slow_Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
    // left turn
-   {YELLOW,5750,7000,15,{Stop, Left_Turn, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+   {YELLOW,5750,7000,15,{Stop, Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
    // right turn
-   {PURPLE,7000,5250,15,{Stop, Right_Turn, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+   {PURPLE,7000,5250,15,{Stop, Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
    // hard left
-   {YELLOW,2500,7250,15,{Stop, Left_Turn, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+   {YELLOW,2500,7250,20,{Stop, Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
    // hard right
-   {PURPLE,2250,7500,15,{Stop, Right_Turn, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+   {SKYBLUE,2250,7500,15,{Stop, Lost, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
    // small left
-   {YELLOW,2250,2500,10,{Stop, Small_Left, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+   {YELLOW,2250,2500,15,{Stop, Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
    // small right
-   {PURPLE,2750,2000,10,{Stop, Small_Right, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}}
+   {BLUE,2750,2000,15,{Stop, Small_Right, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}}
 };
 
 // global variables
