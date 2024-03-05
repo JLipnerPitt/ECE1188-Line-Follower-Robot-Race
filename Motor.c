@@ -13,7 +13,7 @@
 #include <stdint.h>
 #include "msp.h"
 #include "../inc/CortexM.h"
-#include "../inc/PWM.h"
+#include "PWM.h"
 
 // ------------Motor_Init------------
 // Initialize GPIO pins for output, which will be
@@ -34,7 +34,7 @@ void Motor_Init(void){
     P5->OUT &= ~0x30;  // Set direction pins low initially
 
     // Initialize P2.6, P2.7 as outputs for motor PWM
-    PWM_Init34(14999, 0, 0); // initialize right motor and right motor PWM to 0%
+    PWM_Duty34(0, 0); // initialize right motor and right motor PWM to 0%
 
     // Initialize P3.6 and P3.7 as outputs for motor enable
     P3->SEL0 &= ~0xC0; // Clear SEL0 bits
@@ -54,7 +54,7 @@ void Motor_Stop(uint16_t leftDuty, uint16_t rightDuty){
     P5->OUT &= ~0x30; // Clear direction bits
     P3->OUT &= ~0xC0;  // Disable drivers by clearing enable bits
 
-    PWM_Init34(14999, leftDuty, rightDuty); // Set right motor and right motor PWM to 0%
+    PWM_Duty34(leftDuty, rightDuty); // Set right motor and right motor PWM to 0%
 }
 
 // ------------Motor_Forward------------

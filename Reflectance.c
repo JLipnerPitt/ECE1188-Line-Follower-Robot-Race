@@ -100,6 +100,7 @@ uint8_t decision(uint8_t input) {
       case 0xF6:
       case 0x07:
       case 0x7F:
+      case 0xAF:
       //case 0x78: //new
       return 2; // left
 
@@ -120,6 +121,7 @@ uint8_t decision(uint8_t input) {
       case 0x6F:
       case 0xE0:
       case 0xFE:
+      case 0xFA:
       //case 0xC8: // hard right?
       //case 0xE6: // small right?
       //case 0xE4: // right?
@@ -128,6 +130,6 @@ uint8_t decision(uint8_t input) {
       //case 0x3E: // small right?
       return 3; // right
 
-      default: return 2;
+      default: return 0;
     }
 }

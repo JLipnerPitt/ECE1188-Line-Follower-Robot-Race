@@ -47,7 +47,7 @@ typedef const struct State State_t; // allows us to create state structures with
 State_t FSM[9] ={
 
  // lost
-   {RED,0,0,10,{Stop,Left_Turn,Right_Turn,Forward}},
+   {RED,0,0,10,{Stop,Forward,Left_Turn,Right_Turn}},
 
    // forward
    {GREEN,4250,4500,15,{Stop,Forward,Left_Turn,Right_Turn}},
@@ -56,22 +56,22 @@ State_t FSM[9] ={
    {GREEN,2750,3000,10,{Stop,Forward,Left_Turn,Right_Turn}},
 
    // left turn
-   {YELLOW,5750,7000,15,{Right_Turn,Forward,Right_Turn,Left_Turn}},
+   {YELLOW,5750,7000,15,{Forward,Forward,Right_Turn,Left_Turn}},
 
    // right turn
-   {PURPLE,7000,5250,15,{Left_Turn,Forward,Right_Turn,Left_Turn}},
+   {PURPLE,7000,5250,15,{Forward,Forward,Right_Turn,Left_Turn}},
 
    // hard left
-   {YELLOW,2500,7250,20,{Stop,Forward,Right_Turn,Left_Turn}},
+   {YELLOW,2500,7250,20,{Forward,Forward,Right_Turn,Left_Turn}},
 
    // hard right
-   {PURPLE,2250,7500,20,{Stop,Forward,Right_Turn,Left_Turn}},
+   {PURPLE,2250,7500,20,{Forward,Forward,Right_Turn,Left_Turn}},
 
    // small left
-   {YELLOW,2250,2500,10,{Right_Turn,Forward,Right_Turn,Left_Turn}},
+   {YELLOW,2250,2500,10,{Forward,Forward,Right_Turn,Left_Turn}},
 
    // small right
-   {PURPLE,2750,2000,10,{Left_Turn,Forward,Right_Turn,Left_Turn}}
+   {PURPLE,2750,2000,10,{Forward,Forward,Right_Turn,Left_Turn}}
 };
 
 // global variables
@@ -118,7 +118,7 @@ int main(void)
     Port2_Init();
     Reflectance_Init();
     Motor_Init();
-    PWM_Init34(14999);
+    PWM_Init34(14999, 0, 0);
     sensor_state = Stop;
     EnableInterrupts();
 
