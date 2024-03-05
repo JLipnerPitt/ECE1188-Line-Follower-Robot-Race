@@ -1,7 +1,7 @@
 ******************************************************************************
                   TI ARM Linker PC v20.2.7                     
 ******************************************************************************
->> Linked Mon Mar  4 08:23:09 2024
+>> Linked Tue Mar  5 09:14:59 2024
 
 OUTPUT FILE NAME:   <ECE1188 LFR.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00000e49
@@ -45,8 +45,8 @@ section   page    origin      length       input sections
                   000000e4    00000334     system_msp432p401r.obj (.text)
                   00000418    00000248     Reflectance.obj (.text)
                   00000660    000001e0     Clock.obj (.text)
-                  00000840    000001ac     Motor.obj (.text)
-                  000009ec    00000170     main.obj (.text)
+                  00000840    000001a8     Motor.obj (.text)
+                  000009e8    00000174     main.obj (.text)
                   00000b5c    000000b8     PWM.obj (.text)
                   00000c14    000000ac     TimerA0.obj (.text)
                   00000cc0    0000009c     rtsv7M4_T_le_v4SPD16_eabi.lib : memcpy_t2.asm.obj (.text)
@@ -100,11 +100,11 @@ MODULE SUMMARY
        Module                        code   ro data   rw data
        ------                        ----   -------   -------
     .\
-       main.obj                      368    896       12     
+       main.obj                      372    896       12     
        system_msp432p401r.obj        820    0         8      
        Reflectance.obj               584    0         2      
        Clock.obj                     480    0         48     
-       Motor.obj                     428    0         0      
+       Motor.obj                     424    0         0      
        startup_msp432p401r_ccs.obj   14     228       0      
        PWM.obj                       184    0         0      
        TimerA0.obj                   172    0         8      
@@ -190,11 +190,11 @@ address   name
 20000024  IRSensorInput                 
 20000025  MainCount                     
 00000ed7  MemManage_Handler             
-00000985  Motor_Backward                
-000008d9  Motor_Forward                 
+00000981  Motor_Backward                
+000008d5  Motor_Forward                 
 00000841  Motor_Init                    
-00000945  Motor_Left                    
-00000905  Motor_Right                   
+00000941  Motor_Left                    
+00000901  Motor_Right                   
 000008b5  Motor_Stop                    
 00000ed7  NMI_Handler                   
 00000ed7  PCM_IRQHandler                
@@ -208,7 +208,7 @@ address   name
 00000bcb  PWM_Duty34                    
 00000b5d  PWM_Init34                    
 00000ed7  PendSV_Handler                
-000009ed  Port2_Init                    
+000009e9  Port2_Init                    
 2000000c  Postwait                      
 20000004  Prewait                       
 00000ed7  RTC_C_IRQHandler              
@@ -218,8 +218,8 @@ address   name
 00000ecb  Reset_Handler                 
 00000ed7  SVC_Handler                   
 00000e89  StartCritical                 
-00000a17  SysTick_Handler               
-00000a17  SysTick_Handler               
+00000a13  SysTick_Handler               
+00000a13  SysTick_Handler               
 00000e09  SysTick_Init                  
 20000018  SystemCoreClock               
 000000e5  SystemCoreClockUpdate         
@@ -275,7 +275,7 @@ ffffffff  binit
 0000077d  delay                         
 20000026  index                         
 00000000  interruptVectors              
-00000afd  main                          
+00000af9  main                          
 00000cc1  memcpy                        
 20000020  sensor_state                  
 
@@ -300,14 +300,14 @@ address   name
 000007b5  Clock_Delay1ms                
 00000841  Motor_Init                    
 000008b5  Motor_Stop                    
-000008d9  Motor_Forward                 
-00000905  Motor_Right                   
-00000945  Motor_Left                    
-00000985  Motor_Backward                
-000009ed  Port2_Init                    
-00000a17  SysTick_Handler               
-00000a17  SysTick_Handler               
-00000afd  main                          
+000008d5  Motor_Forward                 
+00000901  Motor_Right                   
+00000941  Motor_Left                    
+00000981  Motor_Backward                
+000009e9  Port2_Init                    
+00000a13  SysTick_Handler               
+00000a13  SysTick_Handler               
+00000af9  main                          
 00000b5d  PWM_Init34                    
 00000bcb  PWM_Duty34                    
 00000c15  TimerA0_Init                  

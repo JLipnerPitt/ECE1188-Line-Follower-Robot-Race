@@ -13,7 +13,8 @@
 #include <stdint.h>
 #include "msp.h"
 #include "../inc/CortexM.h"
-#include "../inc/PWM.h"
+#include "PWM.h"
+#include "Motor.h"
 
 // ------------Motor_Init------------
 // Initialize GPIO pins for output, which will be
@@ -54,7 +55,7 @@ void Motor_Stop(void){
     P5->OUT &= ~0x30; // Clear direction bits
     P3->OUT &= ~0xC0;  // Disable drivers by clearing enable bits
 
-    PWM_Init34(14999, 0, 0); // Set right motor and right motor PWM to 0%
+    PWM_Duty34(0, 0); // Set right motor and right motor PWM to 0%
 }
 
 // ------------Motor_Forward------------
@@ -65,7 +66,7 @@ void Motor_Stop(void){
 //        rightDuty duty cycle of right wheel (0 to 14,998)
 // Output: none
 // Assumes: Motor_Init() has been called
-void Motor_Forward(uint16_t leftDuty, uint16_t rightDuty){
+void Motor_Forward(uint16_t leftDuty, uint16_t rightDuty) {
 
     P5->OUT &= ~0x30;   // Clear direction bits for forward motion
     P3->OUT |= 0xC0;    // Enable both drivers
