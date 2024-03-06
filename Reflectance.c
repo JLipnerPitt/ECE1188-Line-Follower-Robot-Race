@@ -67,12 +67,10 @@ uint8_t decision(uint8_t input) {
     // 0x11001111 and 0x11110011 might work better in slight_left and slight_right respectively
     switch (input) {
 
-    case 0xFF: return 0;
-
     case 0xC3:
     case 0xE7:
     case 0xE3:
-    case 0xC7: return 2; // forward
+    case 0xC7: return 1; // forward
 
     case 0xCF:
     case 0xF3:
@@ -83,7 +81,7 @@ uint8_t decision(uint8_t input) {
     case 0x3C: // new
     case 0xCE: // new
     case 0x7E: // new
-    return 3; // slow forward
+    return 2; // slow forward
 
     case 0x3F:
     case 0xDC:
@@ -100,7 +98,7 @@ uint8_t decision(uint8_t input) {
     case 0x9F:
     case 0xAF:
     //case 0x78: //new
-    return 4; // left
+    return 3; // left
 
     case 0xFC:
     case 0xF9:
@@ -122,18 +120,18 @@ uint8_t decision(uint8_t input) {
     //case 0xCC: // hard right?
     //case 0xEE: // small right?
     //case 0x3E: // small right?
-    return 5; // right
+    return 4; // right
 
     case 0xDF:
     case 0xF6:
     case 0x07:
-    case 0x7F:return 6; // slight left
+    case 0x7F:return 5; // slight left
 
     case 0xF1:
     case 0xE1:
     case 0xE0:
-    case 0xFE: return 7; // slight right
+    case 0xFE: return 6; // slight right
 
-    default: return 1;
+    default: return 0;
     }
 }
