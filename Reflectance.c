@@ -70,7 +70,10 @@ uint8_t decision(uint8_t input) {
     case 0xC3:
     case 0xE7:
     case 0xE3:
-    case 0xC7: return 1; // forward
+    case 0xC7:
+    case 0xCE: // new
+    case 0x99: // new
+    return 1; // forward
 
     case 0xCF:
     case 0xF3:
@@ -79,8 +82,9 @@ uint8_t decision(uint8_t input) {
     case 0x81:
     case 0x00: // new
     case 0x3C: // new
-    case 0xCE: // new
+    case 0xBD: // new
     case 0x7E: // new
+    case 0xDB: // new
     return 2; // slow forward
 
     case 0x3F:
@@ -114,23 +118,29 @@ uint8_t decision(uint8_t input) {
     case 0xFB:
     case 0x6F:
     case 0xFA:
+
     //case 0xC8: // hard right?
-    //case 0xE6: // small right?
     //case 0xE4: // right?
     //case 0xCC: // hard right?
-    //case 0xEE: // small right?
-    //case 0x3E: // small right?
     return 4; // right
 
     case 0xDF:
     case 0xF6:
     case 0x07:
-    case 0x7F:return 5; // slight left
+    case 0x7F:
+    case 0x67:
+    case 0xEE:
+    case 0x7C:
+    return 5; // slight left
 
     case 0xF1:
     case 0xE1:
     case 0xE0:
-    case 0xFE: return 6; // slight right
+    case 0xFE:
+    case 0xE6: // small right?
+    case 0x77:
+    case 0x3E:
+    return 6; // slight right
 
     default: return 0;
     }

@@ -52,10 +52,10 @@ typedef const struct State State_t; // allows us to create state structures with
 State_t FSM[9] ={
 
      // lost
-    {WHITE,3250,3000,10,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Left_Turn, Small_Right}},
+    {WHITE,5500,5250,10,{Lost, Slow_Forward, Forward, Small_Left, Small_Right, Left_Turn, Right_Turn}},
 
     // forward
-    {GREEN,5000,4750,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {GREEN,5500,5250, 15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // slow forward
     {GREEN,3250,3000,10,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
