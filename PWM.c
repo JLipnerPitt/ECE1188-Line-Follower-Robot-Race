@@ -25,7 +25,7 @@
 // P2.7=1 when timer equals TA0CCR4 on way down, P2.7=0 when timer equals TA0CCR4 on way up
 // Period of P2.6 is period*1.333us, duty cycle is duty3/period
 // Period of P2.7 is period*1.333us, duty cycle is duty4/period
-void PWM_Init34(uint16_t period, uint16_t duty3, uint16_t duty4) {
+void PWM_Init34(uint16_t period, uint16_t duty3, uint16_t duty4){
 
   P2->DIR |= 0xC0;          // P2.6, P2.7 output
   P2->SEL0 |= 0xC0;         // P2.6, P2.7 Timer0A functions

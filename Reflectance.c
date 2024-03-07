@@ -66,67 +66,82 @@ uint8_t Reflectance_End(void) {
 uint8_t decision(uint8_t input) {
     // 0x11001111 and 0x11110011 might work better in slight_left and slight_right respectively
     switch (input) {
-      case 0xFF: return 0; // stop
 
-      case 0xC3:
-      case 0xE7: return 1; // fast forward
+    case 0xC3:
+    case 0xE7:
+    case 0xE3:
+    case 0xC7:
+    case 0xCE: // new
+    case 0x99: // new
+    return 1; // forward
 
-      case 0xE3:
-      case 0xC7: return 2; // forward
+    case 0xCF:
+    case 0xF3:
+    case 0xEF:
+    case 0xF7:
+    case 0x81:
+    case 0x00: // new
+    case 0x3C: // new
+    case 0xBD: // new
+    case 0x7E: // new
+    case 0xDB: // new
+    return 2; // slow forward
 
-      case 0xCF:
-      case 0xF3:
-      case 0xEF:
-      case 0xF7:
-      case 0x81: return 3; // slow forward
-      //case 0x81:return 3;
+    case 0x3F:
+    case 0xDC:
+    case 0xDE:
+    //case 0xCE:
+    case 0x9C:
+    case 0x1F:
+    case 0x0F:
+    case 0x63:
+    case 0x1C:
+    case 0x03:
+    case 0x8F:
+    case 0x87:
+    case 0x9F:
+    case 0xAF:
+    //case 0x78: //new
+    return 3; // left
 
-      case 0x8F:
-      case 0x87:
-      case 0x9F: return 4; // slow left
+    case 0xFC:
+    case 0xF9:
+    case 0x3B:
+    case 0x7B:
+    case 0x73:
+    case 0x39:
+    case 0xF8:
+    case 0xF0:
+    case 0xC6:
+    case 0x38:
+    case 0xC0:
+    case 0xFB:
+    case 0x6F:
+    case 0xFA:
 
-      case 0x3F:
-      case 0xDC:
-      case 0xDE:
-      case 0xCE:
-      case 0x9C:
-      case 0x1F: return 5; // left
+    //case 0xC8: // hard right?
+    //case 0xE4: // right?
+    //case 0xCC: // hard right?
+    return 4; // right
 
-      case 0x0F:
-      case 0x63:
-      case 0x1C:
-      case 0x03: return 6;
-      //case 0xF8: return 6; // 45 degree left
+    case 0xDF:
+    case 0xF6:
+    case 0x07:
+    case 0x7F:
+    case 0x67:
+    case 0xEE:
+    case 0x7C:
+    return 5; // slight left
 
-      case 0x07:
-      case 0x7F: return 7; // 22 degree left
+    case 0xF1:
+    case 0xE1:
+    case 0xE0:
+    case 0xFE:
+    case 0xE6: // small right?
+    case 0x77:
+    case 0x3E:
+    return 6; // slight right
 
-      case 0xDF:
-      case 0xF6: return 8; // slight left
-
-      case 0xF1:
-      case 0xE1: return 9; // slow right
-
-      case 0xFC:
-      case 0xF9:
-      case 0x3B:
-      case 0x7B:
-      case 0x73:
-      case 0x39:
-      case 0xF8: return 10; // right
-
-      case 0xF0:
-      case 0xC6:
-      case 0x38:
-      case 0xC0: return 11;
-      //case 0x1F: return 11; // 45 degree right
-
-      case 0xE0:
-      case 0xFE: return 12; // 22 degree right
-
-      case 0xFB:
-      case 0x6F: return 13; // slight right
-
-      default: return 0;
+    default: return 0;
     }
 }
