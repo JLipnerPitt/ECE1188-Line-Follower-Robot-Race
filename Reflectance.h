@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+uint8_t IRSensorInput;
 void Reflectance_Init(void);
 void Reflectance_Start(void);
 uint8_t Reflectance_End(void);
