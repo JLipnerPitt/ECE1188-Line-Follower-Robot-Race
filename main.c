@@ -53,31 +53,31 @@ typedef const struct State State_t; // allows us to create state structures with
 State_t FSM[9] ={
 
      // lost
-    {WHITE,3000,2800,5,{Lost, Slow_Forward, Forward, Small_Left, Small_Right, Left_Turn, Right_Turn}},
+    {WHITE,5500,5250,10,{Lost, Slow_Forward, Forward, Small_Left, Small_Right, Left_Turn, Right_Turn}},
 
     // forward
-    {GREEN,6000,5850, 10,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {GREEN,5500,5250, 15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // slow forward
-    {GREEN,4500,4300,10,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {GREEN,3250,3000,10,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // left turn
-    {YELLOW,5750,7000,10,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {YELLOW,5750,7000,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // right turn
-    {PURPLE,7000,5250,10,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {PURPLE,7000,5250,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // hard left
-    {YELLOW,2500,7000,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {YELLOW,2500,7250,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // hard right
-    {SKYBLUE,7500,2500,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {SKYBLUE,2250,7500,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // small left
-    {YELLOW,2300,2500,7,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {YELLOW,2250,2500,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // small right
-    {BLUE,2800,2000,7,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {BLUE,2750,2000,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // stop
     //{RED,0,0,10,{Stop, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}}
