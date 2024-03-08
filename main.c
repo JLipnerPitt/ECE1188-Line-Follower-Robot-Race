@@ -22,7 +22,7 @@ struct State {
     uint16_t leftwheel;
     uint16_t rightwheel;
     uint8_t delay;
-    const struct State *next_state[8];
+    const struct State *next_state[9];
 };
 typedef const struct State State_t; // allows us to create state structures with the State_t initializer
 
@@ -35,7 +35,7 @@ typedef const struct State State_t; // allows us to create state structures with
 #define Right_Turn &FSM[4]
 #define Small_Left &FSM[5]
 #define Small_Right &FSM[6]
-#define Stop &FSM[7]
+//#define Stop &FSM[7]
 /*#define Backward &FSM[9]
 #define Back_Left &FSM[10]
 #define Back_Right_45degrees &FSM[11]*/
@@ -49,34 +49,28 @@ typedef const struct State State_t; // allows us to create state structures with
 #define SKYBLUE 0x06
 
 //50% duty cycle is 7500
-State_t FSM[9] ={
+State_t FSM[7] ={
 
      // lost
-    {WHITE,5500,5250,10,{Lost, Slow_Forward, Forward, Small_Left, Small_Right, Left_Turn, Right_Turn}},
+    {WHITE,5500,5250,0,{Lost, Slow_Forward, Forward, Small_Left, Small_Right, Left_Turn, Right_Turn}},
 
     // forward
     {GREEN,5500,5250, 15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // slow forward
-    {GREEN,3250,3000,10,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {GREEN,5500,5250,10,{Lost, Forward, Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // left turn
-    {YELLOW,5750,7000,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {YELLOW,5750,7000,15,{Lost, Forward, Slow_Forward, Left_Turn, Small_Right, Small_Left, Slow_Forward}},
 
     // right turn
-    {PURPLE,7000,5250,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
-
-    // hard left
-    {YELLOW,2500,7250,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
-
-    // hard right
-    {SKYBLUE,2250,7500,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {PURPLE,7000,5250,15,{Lost, Forward, Slow_Forward, Small_Left, Right_Turn, Slow_Forward, Small_Right}},
 
     // small left
-    {YELLOW,2250,2500,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {YELLOW,3550,3850,10,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // small right
-    {BLUE,2750,2000,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {BLUE,4150,3850,10,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // stop
     //{RED,0,0,10,{Stop, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}}
@@ -87,11 +81,6 @@ State_t FSM[9] ={
 uint8_t IRSensorInput, MainCount, index;
 State_t *sensor_state;  // pointer to ir_sensor fsm
 
-// stores each motor action for a given state
-void (*lookup_table[8])(uint16_t, uint16_t) = {
-    Motor_Forward, Motor_Forward, Motor_Forward, Motor_Left, Motor_Right, Motor_Left, Motor_Right, Motor_Stop
-};
-
 void Port2_Init(void) {
  P2->SEL0 &= ~0x07;
  P2->SEL1 &= ~0x07;
@@ -100,11 +89,16 @@ void Port2_Init(void) {
  P2->OUT &= ~0x07;
 }
 
+// stores each motor action for a given state
+void (*lookup_table[8])(uint16_t, uint16_t) = {
+    Motor_Forward, Motor_Forward, Motor_Forward, Motor_Left, Motor_Right, Motor_Left, Motor_Right
+};
+
 void SysTick_Handler(void) {
-    if (MainCount == 9) {
+    if (MainCount == 6) {
         Reflectance_Start();
     }
-    else if (MainCount == 10) {
+    else if (MainCount == 7) {
         IRSensorInput = Reflectance_End();
 
         // sensor output

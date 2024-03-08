@@ -1,7 +1,7 @@
 ******************************************************************************
                   TI ARM Linker PC v20.2.7                     
 ******************************************************************************
->> Linked Wed Mar  6 18:23:29 2024
+>> Linked Thu Mar  7 14:15:23 2024
 
 OUTPUT FILE NAME:   <ECE1188 LFR.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00000e11
@@ -11,7 +11,7 @@ MEMORY CONFIGURATION
 
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
-  MAIN                  00000000   00040000  00001058  0003efa8  R  X
+  MAIN                  00000000   00040000  00001024  0003efdc  R  X
   INFO                  00200000   00004000  00000000  00004000  R  X
   SRAM_CODE             01000000   00010000  00000247  0000fdb9  RW X
   SRAM_DATA             20000000   00010000  00000247  0000fdb9  RW  
@@ -21,11 +21,11 @@ SEGMENT ALLOCATION MAP
 
 run origin  load origin   length   init length attrs members
 ----------  ----------- ---------- ----------- ----- -------
-00000000    00000000    00001058   00001058    r-x
+00000000    00000000    00001028   00001028    r-x
   00000000    00000000    000000e4   000000e4    r-- .intvecs
   000000e4    000000e4    00000dc4   00000dc4    r-x .text
-  00000ea8    00000ea8    00000168   00000168    r-- .const
-  00001010    00001010    00000048   00000048    r-- .cinit
+  00000ea8    00000ea8    00000134   00000134    r-- .const
+  00000fe0    00000fe0    00000048   00000048    r-- .cinit
 20000000    20000000    00000047   00000000    rw-
   20000000    20000000    0000003c   00000000    rw- .data
   2000003c    2000003c    0000000b   00000000    rw- .bss
@@ -61,16 +61,16 @@ section   page    origin      length       input sections
                   00000ea0    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
                   00000ea4    00000004                                   : exit.c.obj (.text:abort:abort)
 
-.const     0    00000ea8    00000168     
-                  00000ea8    00000168     main.obj (.const:FSM)
+.const     0    00000ea8    00000134     
+                  00000ea8    00000134     main.obj (.const:FSM)
 
-.cinit     0    00001010    00000048     
-                  00001010    0000001f     (.cinit..data.load) [load image, compression = lzss]
-                  0000102f    00000001     --HOLE-- [fill = 0]
-                  00001030    0000000c     (__TI_handler_table)
-                  0000103c    00000004     --HOLE-- [fill = 0]
-                  00001040    00000008     (.cinit..bss.load) [load image, compression = zero_init]
-                  00001048    00000010     (__TI_cinit_table)
+.cinit     0    00000fe0    00000048     
+                  00000fe0    0000001d     (.cinit..data.load) [load image, compression = lzss]
+                  00000ffd    00000003     --HOLE-- [fill = 0]
+                  00001000    0000000c     (__TI_handler_table)
+                  0000100c    00000004     --HOLE-- [fill = 0]
+                  00001010    00000008     (.cinit..bss.load) [load image, compression = zero_init]
+                  00001018    00000010     (__TI_cinit_table)
 
 .init_array 
 *          0    00000000    00000000     UNINITIALIZED
@@ -102,7 +102,7 @@ MODULE SUMMARY
        ------                        ----   -------   -------
     .\
        system_msp432p401r.obj        820    0         8      
-       main.obj                      268    360       78     
+       main.obj                      268    308       78     
        Reflectance.obj               624    0         0      
        Clock.obj                     480    0         48     
        Motor.obj                     432    0         0      
@@ -112,7 +112,7 @@ MODULE SUMMARY
        SysTickInts.obj               64     0         0      
        CortexM.obj                   36     0         0      
     +--+-----------------------------+------+---------+---------+
-       Total:                        3094   588       142    
+       Total:                        3094   536       142    
                                                              
     C:\ti\ccs1260\ccs\tools\compiler\ti-cgt-arm_20.2.7.LTS\lib\rtsv7M4_T_le_v4SPD16_eabi.lib
        memcpy_t2.asm.obj             156    0         0      
@@ -127,21 +127,21 @@ MODULE SUMMARY
        Total:                        430    0         0      
                                                              
        Stack:                        0      0         1024   
-       Linker Generated:             0      67        0      
+       Linker Generated:             0      65        0      
     +--+-----------------------------+------+---------+---------+
-       Grand Total:                  3524   655       1166   
+       Grand Total:                  3524   601       1166   
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 00001048 records: 2, size/record: 8, table size: 16
-	.data: load addr=00001010, load size=0000001f bytes, run addr=20000000, run size=0000003c bytes, compression=lzss
-	.bss: load addr=00001040, load size=00000008 bytes, run addr=2000003c, run size=0000000b bytes, compression=zero_init
+__TI_cinit_table @ 00001018 records: 2, size/record: 8, table size: 16
+	.data: load addr=00000fe0, load size=0000001d bytes, run addr=20000000, run size=0000003c bytes, compression=lzss
+	.bss: load addr=00001010, load size=00000008 bytes, run addr=2000003c, run size=0000000b bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 00001030 records: 3, size/record: 4, table size: 12
+__TI_handler_table @ 00001000 records: 3, size/record: 4, table size: 12
 	index: 0, handler: __TI_decompress_lzss
 	index: 1, handler: __TI_decompress_none
 	index: 2, handler: __TI_zero_init
@@ -246,10 +246,10 @@ address   name
 00000e63  WaitForInterrupt              
 20010000  __STACK_END                   
 00000200  __STACK_SIZE                  
-00001048  __TI_CINIT_Base               
-00001058  __TI_CINIT_Limit              
-00001030  __TI_Handler_Table_Base       
-0000103c  __TI_Handler_Table_Limit      
+00001018  __TI_CINIT_Base               
+00001028  __TI_CINIT_Limit              
+00001000  __TI_Handler_Table_Base       
+0000100c  __TI_Handler_Table_Limit      
 00000d8d  __TI_auto_init_nobinit_nopinit
 00000d25  __TI_decompress_lzss          
 00000e85  __TI_decompress_none          
@@ -385,10 +385,10 @@ address   name
 00000ea5  C$$EXIT                       
 00000ea5  abort                         
 00000ea8  FSM                           
-00001030  __TI_Handler_Table_Base       
-0000103c  __TI_Handler_Table_Limit      
-00001048  __TI_CINIT_Base               
-00001058  __TI_CINIT_Limit              
+00001000  __TI_Handler_Table_Base       
+0000100c  __TI_Handler_Table_Limit      
+00001018  __TI_CINIT_Base               
+00001028  __TI_CINIT_Limit              
 20000000  __start___llvm_prf_cnts       
 20000000  __stop___llvm_prf_cnts        
 20000000  lookup_table                  

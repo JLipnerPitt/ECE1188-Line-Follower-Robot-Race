@@ -91,7 +91,7 @@ void Motor_Right(uint16_t leftDuty, uint16_t rightDuty){
     P5->OUT |= 0x20;    // set P5.5 high (direction backward)
     P3->OUT |= 0x40;    // set P3.6 high (enable motor)
 
-    PWM_Duty34(rightDuty,leftDuty); // Set PWM duty cycles
+    PWM_Duty34(leftDuty,leftDuty); // Set PWM duty cycles
 }
 
 // ------------Motor_Left------------
@@ -112,7 +112,7 @@ void Motor_Left(uint16_t leftDuty, uint16_t rightDuty){
     P5->OUT &= ~0x20;   // set P5.5 low (direction forward)
     P3->OUT |= 0x40;    // set P3.6 high (enable motor)
 
-    PWM_Duty34(rightDuty,leftDuty); // Set PWM duty cycles
+    PWM_Duty34(leftDuty,leftDuty); // Set PWM duty cycles
 }
 
 // ------------Motor_Backward------------
