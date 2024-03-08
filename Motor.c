@@ -14,7 +14,10 @@
 #include "msp.h"
 #include "../inc/CortexM.h"
 #include "PWM.h"
+<<<<<<< HEAD
 #include "Motor.h"
+=======
+>>>>>>> refs/heads/Beta-1.2.2
 
 // ------------Motor_Init------------
 // Initialize GPIO pins for output, which will be
@@ -35,7 +38,7 @@ void Motor_Init(void){
     P5->OUT &= ~0x30;  // Set direction pins low initially
 
     // Initialize P2.6, P2.7 as outputs for motor PWM
-    PWM_Init34(14999, 0, 0); // initialize right motor and right motor PWM to 0%
+    PWM_Duty34(0, 0); // initialize right motor and right motor PWM to 0%
 
     // Initialize P3.6 and P3.7 as outputs for motor enable
     P3->SEL0 &= ~0xC0; // Clear SEL0 bits
@@ -50,12 +53,16 @@ void Motor_Init(void){
 // set the PWM speed control to 0% duty cycle.
 // Input: none
 // Output: none
-void Motor_Stop(void){
+void Motor_Stop(uint16_t leftDuty, uint16_t rightDuty){
 
     P5->OUT &= ~0x30; // Clear direction bits
     P3->OUT &= ~0xC0;  // Disable drivers by clearing enable bits
 
+<<<<<<< HEAD
     PWM_Duty34(0, 0); // Set right motor and right motor PWM to 0%
+=======
+    PWM_Duty34(leftDuty, rightDuty); // Set right motor and right motor PWM to 0%
+>>>>>>> refs/heads/Beta-1.2.2
 }
 
 // ------------Motor_Forward------------
@@ -92,7 +99,7 @@ void Motor_Right(uint16_t leftDuty, uint16_t rightDuty){
     P5->OUT |= 0x20;    // set P5.5 high (direction backward)
     P3->OUT |= 0x40;    // set P3.6 high (enable motor)
 
-    PWM_Duty34(rightDuty,leftDuty); // Set PWM duty cycles
+    PWM_Duty34(leftDuty,leftDuty); // Set PWM duty cycles
 }
 
 // ------------Motor_Left------------
@@ -113,7 +120,7 @@ void Motor_Left(uint16_t leftDuty, uint16_t rightDuty){
     P5->OUT &= ~0x20;   // set P5.5 low (direction forward)
     P3->OUT |= 0x40;    // set P3.6 high (enable motor)
 
-    PWM_Duty34(rightDuty,leftDuty); // Set PWM duty cycles
+    PWM_Duty34(leftDuty,leftDuty); // Set PWM duty cycles
 }
 
 // ------------Motor_Backward------------

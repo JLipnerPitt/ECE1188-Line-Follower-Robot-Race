@@ -21,7 +21,10 @@ Motor.obj: C:/ti/ccs1260/ccs/ccs_base/arm/include/CMSIS/cmsis_ccs.h
 Motor.obj: C:/ti/ccs1260/ccs/ccs_base/arm/include/system_msp432p401r.h
 Motor.obj: ../../inc/CortexM.h
 Motor.obj: ../PWM.h
+<<<<<<< HEAD
 Motor.obj: ../Motor.h
+=======
+>>>>>>> refs/heads/Beta-1.2.2
 
 ../Motor.c:
 
@@ -64,6 +67,9 @@ C:/ti/ccs1260/ccs/ccs_base/arm/include/system_msp432p401r.h:
 ../../inc/CortexM.h:
 
 ../PWM.h:
+<<<<<<< HEAD
 
 ../Motor.h:
+=======
+>>>>>>> refs/heads/Beta-1.2.2
 
