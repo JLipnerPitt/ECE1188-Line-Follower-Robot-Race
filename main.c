@@ -11,12 +11,6 @@
  * main.c
  */
 
-/*void (*motor_stop)(uint16_t, uint16_t) = &Motor_Stop;
-void (*motor_forward)(uint16_t, uint16_t) = &Motor_Forward;
-void (*motor_left)(uint16_t, uint16_t) = &Motor_Left;
-void (*motor_right)(uint16_t, uint16_t) = &Motor_Right;
-void (*motor_backward)(uint16_t, uint16_t) = &Motor_Backward;*/
-
 struct State {
     uint8_t output;
     uint16_t leftwheel;
@@ -35,15 +29,11 @@ typedef const struct State State_t; // allows us to create state structures with
 #define Right_Turn &FSM[4]
 #define Small_Left &FSM[5]
 #define Small_Right &FSM[6]
-//#define Stop &FSM[7]
-/*#define Backward &FSM[9]
-#define Back_Left &FSM[10]
-#define Back_Right_45degrees &FSM[11]*/
 
-#define RED 0x01 // stop
-#define GREEN 0x02 // forward
-#define YELLOW 0x03 // left
-#define PURPLE 0x05 // right
+#define RED 0x01
+#define GREEN 0x02
+#define YELLOW 0x03
+#define PURPLE 0x05
 #define BLUE 0x04
 #define WHITE 0x07
 #define SKYBLUE 0x06
@@ -86,7 +76,7 @@ void Port2_Init(void) {
 }
 
 // stores each motor action for a given state
-void (*lookup_table[8])(uint16_t, uint16_t) = {
+void (*lookup_table[7])(uint16_t, uint16_t) = {
     Motor_Forward, Motor_Forward, Motor_Forward, Motor_Left, Motor_Right, Motor_Left, Motor_Right
 };
 
