@@ -14,11 +14,7 @@
 #include "msp.h"
 #include "../inc/CortexM.h"
 #include "PWM.h"
-<<<<<<< HEAD
 #include "Motor.h"
-=======
->>>>>>> refs/heads/Beta-1.2.2
-
 // ------------Motor_Init------------
 // Initialize GPIO pins for output, which will be
 // used to control the direction of the motors and
@@ -58,11 +54,7 @@ void Motor_Stop(uint16_t leftDuty, uint16_t rightDuty){
     P5->OUT &= ~0x30; // Clear direction bits
     P3->OUT &= ~0xC0;  // Disable drivers by clearing enable bits
 
-<<<<<<< HEAD
-    PWM_Duty34(0, 0); // Set right motor and right motor PWM to 0%
-=======
     PWM_Duty34(leftDuty, rightDuty); // Set right motor and right motor PWM to 0%
->>>>>>> refs/heads/Beta-1.2.2
 }
 
 // ------------Motor_Forward------------
