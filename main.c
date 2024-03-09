@@ -41,13 +41,13 @@ typedef const struct State State_t; // allows us to create state structures with
 //50% duty cycle is 7500
 State_t FSM[7] ={
      // lost
-    {WHITE,5650,5350,2.5,{Lost, Slow_Forward, Forward, Small_Left, Small_Right, Left_Turn, Right_Turn}},
+    {WHITE,5400,5375,2.5,{Lost, Slow_Forward, Forward, Small_Left, Small_Right, Left_Turn, Right_Turn}},
 
     // forward
-    {GREEN,5650,5350,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {GREEN,5400,5375,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // slow forward
-    {GREEN,5650,5350,10,{Lost, Forward, Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {GREEN,5400,5375,10,{Lost, Forward, Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // left turn
     {YELLOW,5750,7000,15,{Lost, Forward, Slow_Forward, Left_Turn, Small_Right, Small_Left, Slow_Forward}},
@@ -106,6 +106,7 @@ int main(void)
     Port2_Init();
     Reflectance_Init();
     Motor_Init();
+    //BumpInt_Init();
     PWM_Init34(14999, 0, 0);
     sensor_state = Lost;
     EnableInterrupts();
