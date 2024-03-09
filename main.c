@@ -41,13 +41,13 @@ typedef const struct State State_t; // allows us to create state structures with
 //50% duty cycle is 7500
 State_t FSM[7] ={
      // lost
-    {WHITE,5500,5250,0,{Lost, Slow_Forward, Forward, Small_Left, Small_Right, Left_Turn, Right_Turn}},
+    {WHITE,5650,5350,2.5,{Lost, Slow_Forward, Forward, Small_Left, Small_Right, Left_Turn, Right_Turn}},
 
     // forward
-    {GREEN,5500,5250, 15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {GREEN,5650,5350,15,{Lost, Forward, Slow_Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // slow forward
-    {GREEN,5500,5250,10,{Lost, Forward, Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
+    {GREEN,5650,5350,10,{Lost, Forward, Forward, Left_Turn, Right_Turn, Small_Left, Small_Right}},
 
     // left turn
     {YELLOW,5750,7000,15,{Lost, Forward, Slow_Forward, Left_Turn, Small_Right, Small_Left, Slow_Forward}},
@@ -87,7 +87,10 @@ void SysTick_Handler(void) {
     else if (MainCount == 5) {
         IRSensorInput = Reflectance_End();
         index = decision(IRSensorInput);
+        sensor_state = sensor_state->next_state[index];
         lookup_table[index](sensor_state->leftwheel, sensor_state->rightwheel);
+        P2->OUT &= ~0x07;
+        P2->OUT = sensor_state->output;
         Clock_Delay1us(sensor_state->delay);
         MainCount = 0;
         return;

@@ -51,6 +51,6 @@ void PWM_Init34(uint16_t period, uint16_t duty3, uint16_t duty4) {
 // Outputs: none// period of P2.7 is 2*period*666.7ns, duty cycle is duty2/period
 void PWM_Duty34(uint16_t Duty3, uint16_t Duty4){
 
-  TIMER_A0->CCR[4] = Duty4;        // CCR4 duty cycle is duty4/period
-  TIMER_A0->CCR[3] = Duty3;       // CCR3 duty cycle is duty3/period
+  TIMER_A0->CCR[4] = Duty3;        // CCR4 duty cycle is duty4/period
+  TIMER_A0->CCR[3] = Duty4;       // CCR3 duty cycle is duty3/period
 }
